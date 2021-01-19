@@ -1,2 +1,0 @@
-# dicee
-Dice Game
