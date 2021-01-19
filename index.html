@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- typically .html files are only named "index.html" -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dicee</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- give btn meaningful id, onClick is a listener, added in index.js -->
+      <button id="roll-dice-button">
+        <h1>Click to Roll</h1>
+      </button>
+      <!-- h1 does not need id, only h1 on the page -->
+      <h1>Who will win?</h1>
+
+      <!-- give both dice more accurate ids; describe what it is -->
+      <div class="dice">
+        <p>Player 1</p>
+        <img id="dice1" src="images/dice6.png" />
+      </div>
+
+      <div class="dice">
+        <p>Player 2</p>
+        <img id="dice2" src="images/dice6.png" />
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

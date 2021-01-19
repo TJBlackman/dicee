@@ -1,60 +1,39 @@
+// Save reference to html elements we need
+// we can just do once at the start, and not every time the button is clicked
+const diceOneImg = document.getElementById('dice1');
+const diceTwoImg = document.getElementById('dice2');
+const rollBtn = document.getElementById('roll-dice-button');
+const h1 = document.querySelector('h1');
 
-    function rollDice1(){
-        var randomNumber1 = Math.floor(Math.random() * 6) + 1;
-        if(randomNumber1 === 1){
-            document.querySelector("img").src = "/images/dice1.png";
-        }else if (randomNumber1 === 2){
-            document.querySelector("img").src = "/images/dice2.png";
-        }else if (randomNumber1 === 3){
-            document.querySelector("img").src = "/images/dice3.png";
-        }else if (randomNumber1 === 4){
-            document.querySelector("img").src = "/images/dice4.png";
-        }else if (randomNumber1 === 5){
-            document.querySelector("img").src = "/images/dice5.png";
-        } else {
-            document.querySelector("img").src = "/images/dice6.png";
-        }
-     return randomNumber1;
-    } 
-    
-
-    function rollDice2(){
-        var randomNumber2 = Math.floor(Math.random() * 6) + 1;  
-
-            if(randomNumber2 === 1){
-                document.getElementById("img2").src = "/images/dice1.png";
-            }else if (randomNumber2 === 2){
-                document.getElementById("img2").src = "/images/dice2.png";
-            }else if (randomNumber2 === 3){
-                document.getElementById("img2").src = "/images/dice3.png";
-            }else if (randomNumber2 === 4){
-                document.getElementById("img2").src = "/images/dice4.png";
-            }else if (randomNumber2 === 5){
-                document.getElementById("img2").src = "/images/dice5.png";
-            } else {
-                document.getElementById("img2").src = "/images/dice6.png";
-            }
-
-        return randomNumber2;
-        }
-
-        function declareWinner(){
-            var randomNumber1 = rollDice1(); 
-            var randomNumber2 = rollDice2();
-            
-            if (randomNumber1 > randomNumber2){
-                document.getElementById("winner").innerHTML = "Player 1 is the Winner!";
-            }else if (randomNumber2 > randomNumber1){
-                document.getElementById("winner").innerHTML = "Player 2 is the Winner!";
-            }else {
-                document.getElementById("winner").innerHTML = "It is a draw!";
-            }
-        }
-        
-
-function buttonClick () {
-    rollDice1();
-    rollDice2();
-    declareWinner ();
+// call this function to return a random number 1-6
+function generateRandomNumber() {
+  return Math.floor(Math.random() * 6) + 1;
 }
 
+// takes in a number, returns image src with that number
+// this works because we know all the images follow the same naming scheme
+function generateImageSrc(number) {
+  return `/images/dice${number}.png`;
+}
+
+// what happens when we roll a dice?
+function rollDice() {
+  // generate new numbers for both dice
+  var diceOneNumber = generateRandomNumber();
+  var diceTwoNumber = generateRandomNumber();
+  // get new image src's, and update them
+  var newImgSrcOne = generateImageSrc(diceOneNumber);
+  var newImgSrcTwo = generateImageSrc(diceTwoNumber);
+  diceOneImg.src = newImgSrcOne;
+  diceTwoImg.src = newImgSrcTwo;
+  // determine winner
+  var winner = 'Player 1';
+  if (diceTwoNumber > diceOneNumber) {
+    winner = 'Player 2';
+  }
+  // display winner
+  h1.innerText = `${winner} is the winner!`;
+}
+
+// listen for the button to be clicked, then roll dice
+rollBtn.addEventListener('click', rollDice);
